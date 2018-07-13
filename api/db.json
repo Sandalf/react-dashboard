@@ -1,0 +1,88 @@
+{
+    "viajes": [
+        {
+            "id": 1,
+            "repartidorId": 1,
+            "fecha": "2018-01-01T00:00:00",
+            "estatus": 1,
+            "distancia": 5.3,
+            "origen": "Auditorio Telmex",
+            "destino": "Basílica de Nuestra Señora de Zapopan",
+            "precio": 81,
+            "detallePaquete": {
+                "peso": 3.2,
+                "descripcion": "sushi",
+                "categoria": 1
+            }
+        },
+        {
+            "id": 2,
+            "repartidorId": 1,
+            "fecha": "2018-01-01T00:00:00",
+            "estatus": 1,
+            "distancia": 5.3,
+            "origen": "Museo Trompo Mágico",
+            "destino": "Hotel NH Collection Guadalajara Providencia",
+            "precio": 71,
+            "detallePaquete": {
+                "peso": 0.2,
+                "descripcion": "pasaporte",
+                "categoria": 2
+            }
+        },
+        {
+            "id": 3,
+            "repartidorId": 1,
+            "fecha": "2018-01-01T00:00:00",
+            "estatus": 2,
+            "distancia": 5.3,
+            "origen": "Museo Trompo Mágico",
+            "destino": "Hotel NH Collection Guadalajara Providencia",
+            "precio": 71,
+            "detallePaquete": {
+                "peso": 0.2,
+                "descripcion": "tarea",
+                "categoria": 2
+            }
+        }
+    ],
+    "estatus": [
+        {
+            "id": 1,
+            "descripcion": "completo"
+        },
+        {
+            "id": 2,
+            "descripcion": "cancelado"
+        }
+    ],
+    "categorias": [
+        {
+            "id": 1,
+            "descipcion": "alimentos"
+        },
+        {
+            "id": 2,
+            "descipcion": "documentos"
+        },
+        {
+            "id": 3,
+            "descipcion": "otros"
+        }
+    ],
+    "repartidores": [
+        {
+            "id": 1,
+            "nombre": "Lorem Ipsum",
+            "tel": "1234567890",
+            "direccion": "Aenean placerat ipsum a vulputate hendrerit"
+        }
+    ],
+    "usuarios": [
+        {
+            "id": 1,
+            "nombre": "Jorge Perez",
+            "tel": "1234567890"
+        }
+    ]
+}
