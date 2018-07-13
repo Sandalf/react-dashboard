@@ -5,13 +5,14 @@ body {
   background: #f3f6f9;
   width: 100vw;
   height: 100vh;
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Varela Round', sans-serif;  
 }
 
 /** HEADER **/
 
 header {
   background: #fff;
+  border: 1px #ebecf0 solid;
 }
 
 /** DASHBOARD **/
@@ -24,6 +25,13 @@ header {
   background: #fff;
   margin-top: 15px;
   padding: 15px;
+  border: 1px #ebecf0 solid;
+  border-radius: 5px;
+}
+
+.section-title {
+  padding-top: 15px;
+  text-transform: uppercase;
 }
 
 .resumen {
@@ -64,12 +72,14 @@ header {
   padding: 0px;
 }
 
-.ganancias .graph-container div:first-child {
-  margin: 0 auto;
-}
-
 @media (min-width: 992px) {
   .ganancias {
     padding-right: 15px;
   }
+}
+
+/**  PAQUETES **/
+
+.paquetes .graph-container div:first-child {
+  margin: 0 auto;
 }
