@@ -16,10 +16,18 @@ header {
 
 /** DASHBOARD **/
 
-.resumen {
-  background: #fff;
+.no-margin {
   margin:0px;
+}
+
+.section {
+  background: #fff;
   margin-top: 15px;
+  padding: 15px;
+}
+
+.resumen {
+  padding: 0em;
 }
 
 .resumen-item {
@@ -27,6 +35,24 @@ header {
   text-align: center;
 }
 
-.resumen-item p {
+.cifra {
   color: #0065ff;
 }
+
+/** VIAJES **/
+
+.viajes {
+  padding: 0px;
+}
+
+.viajes .graph-container div:first-child {
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .viajes {
+    padding-right: 15px;
+  }
+}
+
+/** DISTANCIAS **/
