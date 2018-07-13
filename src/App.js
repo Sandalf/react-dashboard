@@ -95,7 +95,27 @@ class App extends Component {
             {/* Distancias */}
             <Col xs="12" md="6" className="section distancias">
               <div>
-                <span className="cifra">2300 kilometros recorridos</span>
+                <span className="cifra">781 articulos</span>
+                <div>
+                  <LineChart width={500} height={150} data={distanciasData}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                  </LineChart>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row className="no-margin">
+            {/* Ganancias */}
+            <Col xs="12" md="6" className="ganancias">
+              <div className="section">
+                <span className="cifra">$28,430.21 MXN</span>
                 <div>
                   <LineChart width={500} height={150} data={distanciasData}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -111,6 +131,18 @@ class App extends Component {
               </div>
             </Col>
 
+            {/* Paquetes */}
+            <Col xs="12" md="6" className="section paquetes">
+              <div>
+                <span className="cifra">781 articulos entregados</span>
+                <div className="graph-container">
+                  <PieChart width={160} height={160}>
+                    <Pie data={data02} cx={75} cy={75} innerRadius={40} outerRadius={80} fill="#0065ff" />
+                    <Tooltip />
+                  </PieChart>
+                </div>
+              </div>
+            </Col>
           </Row>
         </Container>
       </div>

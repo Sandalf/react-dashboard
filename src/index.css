@@ -56,3 +56,20 @@ header {
 }
 
 /** DISTANCIAS **/
+
+
+/** GANANCIAS **/
+
+.ganancias {
+  padding: 0px;
+}
+
+.ganancias .graph-container div:first-child {
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .ganancias {
+    padding-right: 15px;
+  }
+}
