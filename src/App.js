@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Col, Collapse, Container, Nav, Navbar, NavbarToggler, NavbarBrand, NavItem, NavLink, Row } from 'reactstrap';
+import { PieChart, Pie, Tooltip } from 'recharts';
 import './App.css';
+
+const data02 = [{ name: 'Completados', value: 603 }, { name: 'Cancelados', value: 30 }];
 
 class App extends Component {
   state = {
@@ -33,36 +36,55 @@ class App extends Component {
           </Navbar>
         </header>
         <Container>
-          <Row className="resumen">
+          <Row className="resumen section no-margin">
             <Col>
               <div className="resumen-item">
-                <p>633</p>
+                <p className="cifra">633</p>
                 <span>Viajes</span>
               </div>
             </Col>
             <Col>
               <div className="resumen-item">
-                <p>$28K</p>
+                <p className="cifra">$28K</p>
                 <span>Ganancias</span>
               </div>
             </Col>
             <Col>
               <div className="resumen-item">
-                <p>2.3K</p>
+                <p className="cifra">2.3K</p>
                 <span>Kms</span>
               </div>
             </Col>
             <Col>
               <div className="resumen-item">
-                <p>701</p>
+                <p className="cifra">701</p>
                 <span>Articulos</span>
               </div>
             </Col>
             <Col>
               <div className="resumen-item">
-                <p>9/10</p>
-                <span>Rating</span>
+                <p className="cifra">9/10</p>
+                <span>Puntaje</span>
               </div>
+            </Col>
+          </Row>
+          <Row className="no-margin">
+            {/* Viajes */}
+            <Col xs="12" md="6" className="viajes">
+              <div className="section">
+                <span className="cifra">633 viajes realizados</span>
+                <div className="graph-container">
+                  <PieChart width={160} height={160}>
+                    <Pie data={data02} cx={75} cy={75} innerRadius={40} outerRadius={80} fill="#0065ff" />
+                    <Tooltip />
+                  </PieChart>
+                </div>
+              </div>
+            </Col>
+
+            {/* Distancias */}
+            <Col xs="12" md="6" className="section distancias">
+              <div></div>
             </Col>
           </Row>
         </Container>
