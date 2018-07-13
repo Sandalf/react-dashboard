@@ -2,4 +2,31 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: #f3f6f9;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Varela Round', sans-serif;
+}
+
+/** HEADER **/
+
+header {
+  background: #fff;
+}
+
+/** DASHBOARD **/
+
+.resumen {
+  background: #fff;
+  margin:0px;
+  margin-top: 15px;
+}
+
+.resumen-item {
+  padding: .5em;
+  text-align: center;
+}
+
+.resumen-item p {
+  color: #0065ff;
 }
