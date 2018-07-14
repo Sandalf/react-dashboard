@@ -3,6 +3,9 @@ import { Col, Collapse, Container, Nav, Navbar, NavbarToggler, NavbarBrand, NavI
 import { CartesianGrid, Legend, Line, LineChart, PieChart, Pie, Tooltip, XAxis, YAxis } from 'recharts';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import IoCalendar from 'react-icons/lib/io/calendar';
+import moment from 'moment';
+import MomentLocaleUtils, { formatDate, parseDate } from 'react-day-picker/moment';
+import 'moment/locale/es';
 import 'react-day-picker/lib/style.css';
 import './App.css';
 
@@ -20,7 +23,28 @@ const distanciasData = [
 
 class App extends Component {
   state = {
-    collapsed: true
+    collapsed: true,
+    from: undefined,
+    to: undefined,
+  }
+
+  showFromMonth = () => {
+    const { from, to } = this.state;
+    if (!from) {
+      return;
+    }
+    if (moment(to).diff(moment(from), 'months') < 2) {
+      this.to.getDayPicker().showMonth(from);
+    }
+  }
+
+  handleFromChange = (from) => {
+    // Change the from date and focus the "to" input field    
+    this.setState({ from });
+  }
+
+  handleToChange = (to) => {
+    this.setState({ to }, this.showFromMonth);
   }
 
   toggleNavbar = () => {
@@ -30,6 +54,8 @@ class App extends Component {
   }
 
   render() {
+    const { from, to } = this.state;
+    const modifiers = { start: from, end: to };
     return (
       <div>
         <header>
@@ -53,8 +79,43 @@ class App extends Component {
             <Col>
               <div className="date-container">
                 <span className="date-icon"><IoCalendar /></span>
-                <span className="date-start"><DayPickerInput placeholder="Fecha Inicio" onDayChange={day => console.log(day)} /></span>
-                <span className="date-end"><DayPickerInput placeholder="Fecha Fin" onDayChange={day => console.log(day)} /></span>
+                <span className="date-start">
+                  <DayPickerInput
+                    formatDate={formatDate}
+                    parseDate={parseDate}
+                    value={from} format="LL"
+                    placeholder="Fecha Inicio"
+                    dayPickerProps={{
+                      selectedDays: [from, { from, to }],
+                      disabledDays: { after: to },
+                      localeUtils: MomentLocaleUtils,
+                      locale: "es",
+                      modifiers,
+                      numberOfMonths: 1,
+                      onDayClick: () => this.to.getInput().focus(),
+                    }}
+                    onDayChange={this.handleFromChange} />
+                </span>
+                <span className="date-end">
+                  <DayPickerInput
+                    ref={el => (this.to = el)}
+                    value={to}
+                    formatDate={formatDate}
+                    parseDate={parseDate}
+                    format="LL"
+                    placeholder="Fecha Fin"
+                    dayPickerProps={{
+                      selectedDays: [from, { from, to }],
+                      disabledDays: { before: from },
+                      localeUtils: MomentLocaleUtils,
+                      locale: "es",
+                      modifiers,
+                      month: from,
+                      fromMonth: from,
+                      numberOfMonths: 1,
+                    }}
+                    onDayChange={this.handleToChange} />
+                </span>
               </div>
             </Col>
           </Row>
