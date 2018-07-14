@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Col, Collapse, Container, Nav, Navbar, NavbarToggler, NavbarBrand, NavItem, NavLink, Row } from 'reactstrap';
 import { CartesianGrid, Legend, Line, LineChart, PieChart, Pie, Tooltip, XAxis, YAxis } from 'recharts';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import IoCalendar from 'react-icons/lib/io/calendar';
+import 'react-day-picker/lib/style.css';
 import './App.css';
 
 const data02 = [{ name: 'Completados', value: 603 }, { name: 'Cancelados', value: 30 }];
@@ -46,6 +49,15 @@ class App extends Component {
           </Navbar>
         </header>
         <Container>
+          <Row>
+            <Col>
+              <div className="date-container">
+                <span className="date-icon"><IoCalendar /></span>
+                <span className="date-start"><DayPickerInput placeholder="Fecha Inicio" onDayChange={day => console.log(day)} /></span>
+                <span className="date-end"><DayPickerInput placeholder="Fecha Fin" onDayChange={day => console.log(day)} /></span>
+              </div>
+            </Col>
+          </Row>
           <Row className="resumen section no-margin">
             <Col>
               <div className="resumen-item">

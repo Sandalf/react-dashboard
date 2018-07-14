@@ -43,6 +43,10 @@ header {
   text-align: center;
 }
 
+.resumen-item p {
+  margin: 0px;
+}
+
 .cifra {
   color: #0065ff;
 }
@@ -82,4 +86,31 @@ header {
 
 .paquetes .graph-container div:first-child {
   margin: 0 auto;
+}
+
+/** DATE PICKER **/
+
+.date-container {
+  padding-top: 15px;
+}
+
+.date-icon {
+  border: 1px #ebecf0 solid;  
+  background: #fff;
+  height: 100%;
+  padding: 7px 15px;
+  border-right: none;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.date-container input {
+  border: 1px #ebecf0 solid;  
+  border-left: none;  
+  height: 2.25em;
+  cursor: pointer;
+}
+
+.date-end input {
+  border-radius: 0px 5px 5px 0px;
+  padding-left: 15px;
 }
