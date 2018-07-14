@@ -119,13 +119,16 @@ header {
   background-color: #f0f8ff !important;
   color: #4a90e2;
 }
+
 .date-start .DayPicker-Day {
   border-radius: 0 !important;
 }
+
 .date-start .DayPicker-Day--start {
   border-top-left-radius: 50% !important;
   border-bottom-left-radius: 50% !important;
 }
+
 .date-start .DayPicker-Day--end {
   border-top-right-radius: 50% !important;
   border-bottom-right-radius: 50% !important;
@@ -135,13 +138,16 @@ header {
   background-color: #f0f8ff !important;
   color: #4a90e2;
 }
+
 .date-end .DayPicker-Day {
   border-radius: 0 !important;
 }
+
 .date-end .DayPicker-Day--start {
   border-top-left-radius: 50% !important;
   border-bottom-left-radius: 50% !important;
 }
+
 .date-end .DayPicker-Day--end {
   border-top-right-radius: 50% !important;
   border-bottom-right-radius: 50% !important;
