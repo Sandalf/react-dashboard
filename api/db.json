@@ -9,11 +9,15 @@
             "origen": "Auditorio Telmex",
             "destino": "Basílica de Nuestra Señora de Zapopan",
             "precio": 81,
-            "detallePaquete": {
-                "peso": 3.2,
-                "descripcion": "sushi",
-                "categoria": 1
-            }
+            "detallePaquete": [
+                {
+                    "peso": 3.2,
+                    "descripcion": "sushi",
+                    "categoria": 1
+                }
+            ],
+            "distancia": 4000,
+            "puntaje": 9
         },
         {
             "id": 2,
@@ -24,11 +28,15 @@
             "origen": "Museo Trompo Mágico",
             "destino": "Hotel NH Collection Guadalajara Providencia",
             "precio": 71,
-            "detallePaquete": {
-                "peso": 0.2,
-                "descripcion": "pasaporte",
-                "categoria": 2
-            }
+            "detallePaquete": [
+                {
+                    "peso": 0.2,
+                    "descripcion": "pasaporte",
+                    "categoria": 2
+                }
+            ],
+            "distancia": 2000,
+            "puntaje": 9
         },
         {
             "id": 3,
@@ -39,11 +47,15 @@
             "origen": "Museo Trompo Mágico",
             "destino": "Hotel NH Collection Guadalajara Providencia",
             "precio": 71,
-            "detallePaquete": {
-                "peso": 0.2,
-                "descripcion": "tarea",
-                "categoria": 2
-            }
+            "detallePaquete": [
+                {
+                    "peso": 0.2,
+                    "descripcion": "tarea",
+                    "categoria": 2
+                }
+            ],
+            "distancia": 0,
+            "puntaje": 0
         }
     ],
     "estatus": [

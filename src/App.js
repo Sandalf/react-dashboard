@@ -9,6 +9,8 @@ import 'moment/locale/es';
 import 'react-day-picker/lib/style.css';
 import './App.css';
 
+import Resumen from './components/Resumen'
+
 const data02 = [{ name: 'Completados', value: 603 }, { name: 'Cancelados', value: 30 }];
 
 const distanciasData = [
@@ -26,6 +28,38 @@ class App extends Component {
     collapsed: true,
     from: undefined,
     to: undefined,
+    viajes: [],
+    stats: {
+      viajes: 0,
+      ganancias: 0,
+      distancia: 0,
+      articulos: 0,
+      puntaje: 0,
+    },
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:4000/viajes')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong');
+        }
+      })
+      .then((response) => {
+        let ganancias = 0;
+        let distancia = 0;
+        let articulos = 0;
+        let puntaje = 0;
+        for (const viaje of response) {
+          ganancias += viaje.precio;
+          distancia += viaje.distancia;
+          articulos += viaje.detallePaquete.length;
+          puntaje += viaje.puntaje;
+        }
+        this.setState({ stats: { viajes: response.length, ganancias, distancia, articulos, puntaje: puntaje / response.length } });        
+      })
   }
 
   showFromMonth = () => {
@@ -54,7 +88,7 @@ class App extends Component {
   }
 
   render() {
-    const { from, to } = this.state;
+    const { from, to, stats } = this.state;
     const modifiers = { start: from, end: to };
     return (
       <div>
@@ -119,38 +153,12 @@ class App extends Component {
               </div>
             </Col>
           </Row>
-          <Row className="resumen section no-margin">
-            <Col>
-              <div className="resumen-item">
-                <p className="cifra">633</p>
-                <span>Viajes</span>
-              </div>
-            </Col>
-            <Col>
-              <div className="resumen-item">
-                <p className="cifra">$28K</p>
-                <span>Ganancias</span>
-              </div>
-            </Col>
-            <Col>
-              <div className="resumen-item">
-                <p className="cifra">2.3K</p>
-                <span>Kms</span>
-              </div>
-            </Col>
-            <Col>
-              <div className="resumen-item">
-                <p className="cifra">701</p>
-                <span>Articulos</span>
-              </div>
-            </Col>
-            <Col>
-              <div className="resumen-item">
-                <p className="cifra">9/10</p>
-                <span>Puntaje</span>
-              </div>
-            </Col>
-          </Row>
+          <Resumen
+            viajes={stats.viajes}
+            ganancias={stats.ganancias}
+            distancia={stats.distancia}
+            articulos={stats.articulos}
+            puntaje={stats.puntaje} />
           <Row className="no-margin">
 
             {/* Viajes */}
