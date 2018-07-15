@@ -2,36 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'reactstrap';
 
-const Resumen = ({ viajes, ganancias, distancia, articulos, puntaje }) => {
+const Resumen = ({ trips, earnings, distance, products, score }) => {
   return (
     <Row className="resumen section no-margin">
       <Col>
         <div className="resumen-item">
-          <p className="cifra">{viajes}</p>
+          <p className="cifra">{trips}</p>
           <span>Viajes</span>
         </div>
       </Col>
       <Col>
         <div className="resumen-item">
-          <p className="cifra">${ganancias}</p>
+          <p className="cifra">${earnings}</p>
           <span>Ganancias</span>
         </div>
       </Col>
       <Col>
         <div className="resumen-item">
-          <p className="cifra">{distancia/1000}K</p>
+          <p className="cifra">{distance}</p>
           <span>Kms</span>
         </div>
       </Col>
       <Col>
         <div className="resumen-item">
-          <p className="cifra">{articulos}</p>
+          <p className="cifra">{products}</p>
           <span>Articulos</span>
         </div>
       </Col>
       <Col>
         <div className="resumen-item">
-          <p className="cifra">{puntaje}/10</p>
+          <p className="cifra">{score}/10</p>
           <span>Puntaje</span>
         </div>
       </Col>
