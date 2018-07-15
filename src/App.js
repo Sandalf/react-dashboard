@@ -81,25 +81,19 @@ class App extends Component {
   }
 
   updateStats = () => {
-    console.log('updateStats');
-    console.log('this.state.trips', this.state.trips);
     const { from, to } = this.state;
     let dateEnd = to ? to : moment();
     let dateStart = from ? from : moment().startOf('year');
-    console.log('dateEnd', dateEnd);
-    console.log('dateStart', dateStart);
     let trips = 0;
     let earnings = 0;
     let distance = 0;
     let products = 0;
     let score = 0;
     let groupedData = this.getLineGraphDates();
-    console.log('getLineGraphDates', groupedData);
     let format = this.getLineGraphDateFormat();
     for (const trip of this.state.trips) {
       if (dateStart && dateEnd) {
         if (moment(trip.fecha).isBetween(dateStart, dateEnd)) {
-          console.log('inside');
           trips += 1;
           earnings += trip.precio;
           distance += trip.distancia;
@@ -124,7 +118,7 @@ class App extends Component {
 
   getLineGraphDates = () => {
     let data = [];
-    let { to, from } = this.state;
+    const { to, from } = this.state;
     let dateEnd = to ? moment(to) : moment();
     let dateStart = from ? moment(from) : moment().startOf('year');
     if (moment(dateEnd).diff(moment(dateStart), 'years') >= 1) {
@@ -155,18 +149,20 @@ class App extends Component {
   getLineGraphDateFormat = () => {
     let format = 'MMM';
     const { to, from } = this.state;
-    if (moment(to).diff(moment(from), 'years') >= 1) {
+    let dateEnd = to ? moment(to) : moment();
+    let dateStart = from ? moment(from) : moment().startOf('year');
+    if (moment(dateEnd).diff(moment(dateStart), 'years') >= 1) {
       return 'YYYY';
-    } else if (moment(to).diff(moment(from), 'months') >= 1) {
+    } else if (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
       return 'MMM';
-    } else if (moment(to).diff(moment(from), 'days') >= 1) {
+    } else if (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
       return 'MMM Do';
     }
     return format;
   }
 
   addLineGraphElement(_stats, trip, dateFormat) {
-    console.log('addLineGraphElement');
+    console.log('moment(trip.fecha).format(dateFormat)',moment(trip.fecha).format(dateFormat));
     let stats = [..._stats];
     let index = 0;
     let dataObj = stats.find((el, i) => {
