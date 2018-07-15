@@ -18,13 +18,13 @@ import Resumen from './components/Resumen'
 const data02 = [{ name: 'Completados', value: 603 }, { name: 'Cancelados', value: 30 }];
 
 const distanciasData = [
-  { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-  { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-  { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-  { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-  { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-  { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+  { name: 'Ene', uv: 0, pv: 0, amount: 0, kms: 0, },
+  { name: 'Feb', uv: 0, pv: 0, amount: 0, kms: 0, },
+  { name: 'Mar', uv: 0, pv: 0, amount: 0, kms: 0, },
+  { name: 'Abr', uv: 0, pv: 0, amount: 0, kms: 0, },
+  { name: 'May', uv: 0, pv: 0, amount: 0, kms: 0, },
+  { name: 'Jun', uv: 0, pv: 0, amount: 0, kms: 0, },
+  { name: 'Jul', uv: 0, pv: 0, amount: 0, kms: 0, },
 ];
 
 class App extends Component {
@@ -32,13 +32,14 @@ class App extends Component {
     collapsed: true,
     from: undefined,
     to: undefined,
-    viajes: [],
+    trips: [],
     stats: {
-      viajes: 0,
-      ganancias: 0,
-      distancia: 0,
-      articulos: 0,
-      puntaje: 0,
+      trips: 0,
+      earnings: 0,
+      distance: 0,
+      products: 0,
+      score: 0,
+      groupedData: distanciasData,
     },
   }
 
@@ -52,17 +53,9 @@ class App extends Component {
         }
       })
       .then((response) => {
-        let ganancias = 0;
-        let distancia = 0;
-        let articulos = 0;
-        let puntaje = 0;
-        for (const viaje of response) {
-          ganancias += viaje.precio;
-          distancia += viaje.distancia;
-          articulos += viaje.detallePaquete.length;
-          puntaje += viaje.puntaje;
-        }
-        this.setState({ stats: { viajes: response.length, ganancias, distancia, articulos, puntaje: puntaje / response.length } });
+        this.setState({ trips: response }, () => {
+          this.updateStats();
+        });
       })
   }
 
@@ -77,18 +70,117 @@ class App extends Component {
   }
 
   handleFromChange = (from) => {
-    // Change the from date and focus the "to" input field    
-    this.setState({ from });
+    this.setState({ from }, this.updateStats);
   }
 
   handleToChange = (to) => {
-    this.setState({ to }, this.showFromMonth);
+    this.setState({ to }, () => {
+      this.showFromMonth();
+      this.updateStats();
+    });
   }
 
-  toggleNavbar = () => {
+  updateStats = () => {
+    console.log('updateStats');
+    console.log('this.state.trips', this.state.trips);
+    const { from, to } = this.state;
+    let dateEnd = to ? to : moment();
+    let dateStart = from ? from : moment().startOf('year');
+    console.log('dateEnd', dateEnd);
+    console.log('dateStart', dateStart);
+    let trips = 0;
+    let earnings = 0;
+    let distance = 0;
+    let products = 0;
+    let score = 0;
+    let groupedData = this.getLineGraphDates();
+    console.log('getLineGraphDates', groupedData);
+    let format = this.getLineGraphDateFormat();
+    for (const trip of this.state.trips) {
+      if (dateStart && dateEnd) {
+        if (moment(trip.fecha).isBetween(dateStart, dateEnd)) {
+          console.log('inside');
+          trips += 1;
+          earnings += trip.precio;
+          distance += trip.distancia;
+          products += trip.detallePaquete.length;
+          score += trip.puntaje;
+          groupedData = this.addLineGraphElement(groupedData, trip, format);
+        }
+      }
+    }
+    console.log('groupedData', groupedData);
     this.setState({
-      collapsed: !this.state.collapsed
+      stats: {
+        trips,
+        earnings,
+        distance,
+        products,
+        score: score / trips,
+        groupedData,
+      }
     });
+  }
+
+  getLineGraphDates = () => {
+    let data = [];
+    let { to, from } = this.state;
+    let dateEnd = to ? moment(to) : moment();
+    let dateStart = from ? moment(from) : moment().startOf('year');
+    if (moment(dateEnd).diff(moment(dateStart), 'years') >= 1) {
+      while (moment(dateEnd).diff(moment(dateStart), 'years') >= 1) {
+        data.push({ name: dateStart.format('YYYY'), amount: 0, kms: 0, });
+        dateStart.add(1, 'years');
+      }
+      data.push({ name: dateStart.format('YYYY'), amount: 0, kms: 0, });
+      console.log('data years', data);
+    } else if (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
+      while (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
+        data.push({ name: dateStart.format('MMM'), amount: 0, kms: 0, });
+        dateStart.add(1, 'months');
+      }
+      data.push({ name: dateStart.format('MMM'), amount: 0, kms: 0, });
+      console.log('data month', data);
+    } else if (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
+      while (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
+        data.push({ name: dateStart.format('MMM Do'), amount: 0, kms: 0, });
+        dateStart.add(1, 'days');
+      }
+      data.push({ name: dateStart.format('MMM Do'), amount: 0, kms: 0, });
+      console.log('data days', data);
+    }
+    return data;
+  }
+
+  getLineGraphDateFormat = () => {
+    let format = 'MMM';
+    const { to, from } = this.state;
+    if (moment(to).diff(moment(from), 'years') >= 1) {
+      return 'YYYY';
+    } else if (moment(to).diff(moment(from), 'months') >= 1) {
+      return 'MMM';
+    } else if (moment(to).diff(moment(from), 'days') >= 1) {
+      return 'MMM Do';
+    }
+    return format;
+  }
+
+  addLineGraphElement(_stats, trip, dateFormat) {
+    console.log('addLineGraphElement');
+    let stats = [..._stats];
+    let index = 0;
+    let dataObj = stats.find((el, i) => {
+      index = i;
+      return el.name === moment(trip.fecha).format(dateFormat);
+    });
+
+    if (dataObj) {
+      dataObj.amount += trip.precio;
+      dataObj.kms += trip.distancia;
+      stats[index] = dataObj;
+    }
+
+    return stats;
   }
 
   render() {
@@ -96,7 +188,7 @@ class App extends Component {
     const modifiers = { start: from, end: to };
     return (
       <div>
-        <Menu/>
+        <Menu />
         <Container>
           <Row>
             <Col>
@@ -106,7 +198,8 @@ class App extends Component {
                   <DayPickerInput
                     formatDate={formatDate}
                     parseDate={parseDate}
-                    value={from} format="LL"
+                    value={from ? from : moment().startOf('year').format('LL')}
+                    format="LL"
                     placeholder="Fecha Inicio"
                     dayPickerProps={{
                       selectedDays: [from, { from, to }],
@@ -122,7 +215,7 @@ class App extends Component {
                 <span className="date-end">
                   <DayPickerInput
                     ref={el => (this.to = el)}
-                    value={to}
+                    value={to ? to : moment().format('LL')}
                     formatDate={formatDate}
                     parseDate={parseDate}
                     format="LL"
@@ -143,11 +236,11 @@ class App extends Component {
             </Col>
           </Row>
           <Resumen
-            viajes={stats.viajes}
-            ganancias={stats.ganancias}
-            distancia={stats.distancia}
-            articulos={stats.articulos}
-            puntaje={stats.puntaje} />
+            trips={stats.trips}
+            earnings={stats.earnings}
+            distance={stats.distance}
+            products={stats.products}
+            score={stats.score} />
           <Row className="no-margin">
 
             {/* Viajes */}
@@ -165,12 +258,12 @@ class App extends Component {
 
             {/* Ganancias */}
             <Col xs="12" md="6" className="ganancias">
-              <Ganancias data={distanciasData} />
+              <Ganancias total={stats.earnings} data={stats.groupedData} />
             </Col>
 
             {/* Distancias */}
             <Col xs="12" md="6" className="section distancias">
-              <Distancias data={distanciasData} />
+              <Distancias total={stats.distance} data={stats.groupedData} />
             </Col>
 
           </Row>

@@ -3,9 +3,8 @@
         {
             "id": 1,
             "repartidorId": 1,
-            "fecha": "2018-01-01T00:00:00",
+            "fecha": "2018-07-01T00:00:00",
             "estatus": 1,
-            "distancia": 5.3,
             "origen": "Auditorio Telmex",
             "destino": "Basílica de Nuestra Señora de Zapopan",
             "precio": 81,
@@ -16,15 +15,14 @@
                     "categoria": 1
                 }
             ],
-            "distancia": 4000,
+            "distancia": 4,
             "puntaje": 9
         },
         {
             "id": 2,
             "repartidorId": 1,
-            "fecha": "2018-01-01T00:00:00",
+            "fecha": "2018-07-01T00:00:00",
             "estatus": 1,
-            "distancia": 5.3,
             "origen": "Museo Trompo Mágico",
             "destino": "Hotel NH Collection Guadalajara Providencia",
             "precio": 71,
@@ -35,15 +33,14 @@
                     "categoria": 2
                 }
             ],
-            "distancia": 2000,
+            "distancia": 2,
             "puntaje": 9
         },
         {
             "id": 3,
             "repartidorId": 1,
-            "fecha": "2018-01-01T00:00:00",
+            "fecha": "2018-07-01T00:00:00",
             "estatus": 2,
-            "distancia": 5.3,
             "origen": "Museo Trompo Mágico",
             "destino": "Hotel NH Collection Guadalajara Providencia",
             "precio": 71,

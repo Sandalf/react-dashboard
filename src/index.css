@@ -99,7 +99,6 @@ header {
   background: #fff;
   height: 100%;
   padding: 7px 15px;
-  border-right: none;
   border-radius: 5px 0px 0px 5px;
 }
 
@@ -108,11 +107,11 @@ header {
   border-left: none;  
   height: 2.25em;
   cursor: pointer;
+  padding-left: 15px;
 }
 
 .date-end input {
   border-radius: 0px 5px 5px 0px;
-  padding-left: 15px;
 }
 
 .date-start .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
