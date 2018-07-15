@@ -34,7 +34,10 @@ class App extends Component {
     to: undefined,
     trips: [],
     stats: {
-      trips: 0,
+      trips: {
+        completed: 0,
+        canceled: 0,
+      },
       earnings: 0,
       distance: 0,
       products: 0,
@@ -84,7 +87,7 @@ class App extends Component {
     const { from, to } = this.state;
     let dateEnd = to ? to : moment();
     let dateStart = from ? from : moment().startOf('year');
-    let trips = 0;
+    let trips = { completed: 0, canceled: 0 };
     let earnings = 0;
     let distance = 0;
     let products = 0;
@@ -94,7 +97,7 @@ class App extends Component {
     for (const trip of this.state.trips) {
       if (dateStart && dateEnd) {
         if (moment(trip.fecha).isBetween(dateStart, dateEnd)) {
-          trips += 1;
+          trip.estatus === 1 ? trips.completed += 1 : trips.canceled += 1;
           earnings += trip.precio;
           distance += trip.distancia;
           products += trip.detallePaquete.length;
@@ -110,7 +113,7 @@ class App extends Component {
         earnings,
         distance,
         products,
-        score: score / trips,
+        score: score / trips.completed,
         groupedData,
       }
     });
@@ -162,7 +165,7 @@ class App extends Component {
   }
 
   addLineGraphElement(_stats, trip, dateFormat) {
-    console.log('moment(trip.fecha).format(dateFormat)',moment(trip.fecha).format(dateFormat));
+    console.log('moment(trip.fecha).format(dateFormat)', moment(trip.fecha).format(dateFormat));
     let stats = [..._stats];
     let index = 0;
     let dataObj = stats.find((el, i) => {
@@ -232,7 +235,7 @@ class App extends Component {
             </Col>
           </Row>
           <Resumen
-            trips={stats.trips}
+            trips={stats.trips.completed + stats.trips.canceled}
             earnings={stats.earnings}
             distance={stats.distance}
             products={stats.products}
@@ -241,12 +244,16 @@ class App extends Component {
 
             {/* Viajes */}
             <Col xs="12" md="6" className="viajes">
-              <Viajes data={data02} />
+              <Viajes 
+                total={stats.trips.completed + stats.trips.canceled} 
+                data={[{ name: 'Cancelados', value: stats.trips.canceled }, { name: 'Completados', value: stats.trips.completed }]} />
             </Col>
 
             {/* Paquetes */}
             <Col xs="12" md="6" className="section paquetes">
-              <Paquetes data={data02} />
+              <Paquetes 
+                total={0}
+                data={[{ name: 'Cancelados', value: stats.trips.canceled }, { name: 'Completados', value: stats.trips.completed }]} />
             </Col>
 
           </Row>
