@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Col, Collapse, Container, Nav, Navbar, NavbarToggler, NavbarBrand, NavItem, NavLink, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import IoCalendar from 'react-icons/lib/io/calendar';
 import moment from 'moment';
 import MomentLocaleUtils, { formatDate, parseDate } from 'react-day-picker/moment';
 import Distancias from './components/Distancias';
 import Ganancias from './components/Ganancias';
+import Menu from './components/Menu';
 import Paquetes from './components/Paquetes';
 import Viajes from './components/Viajes';
 import 'moment/locale/es';
@@ -95,22 +96,7 @@ class App extends Component {
     const modifiers = { start: from, end: to };
     return (
       <div>
-        <header>
-          <Navbar color="faded" light>
-            <NavbarBrand href="/" className="mr-auto" style={{ color: '#0065ff' }}>Zubut</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse isOpen={!this.state.collapsed} navbar>
-              <Nav navbar>
-                <NavItem>
-                  <NavLink href="#">Inicio</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="#">Dashboard</NavLink>
-                </NavItem>
-              </Nav>
-            </Collapse>
-          </Navbar>
-        </header>
+        <Menu/>
         <Container>
           <Row>
             <Col>
