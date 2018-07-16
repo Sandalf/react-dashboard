@@ -15,7 +15,7 @@ import './App.css';
 
 import Resumen from './components/Resumen'
 
-const data02 = [{ name: 'Completados', value: 603 }, { name: 'Cancelados', value: 30 }];
+const data02 = [{ name: 'Completados', value: 603, id: 2 }, { name: 'Cancelados', value: 30, id: 1 }];
 
 const distanciasData = [
   { name: 'Ene', uv: 0, pv: 0, amount: 0, kms: 0, },
@@ -33,8 +33,13 @@ class App extends Component {
     from: undefined,
     to: undefined,
     trips: [],
+    productCategories: [],
     stats: {
-      trips: 0,
+      trips: {
+        completed: 0,
+        canceled: 0,
+      },
+      productStats: [],
       earnings: 0,
       distance: 0,
       products: 0,
@@ -43,20 +48,17 @@ class App extends Component {
     },
   }
 
-  componentDidMount() {
-    fetch('http://localhost:4000/viajes')
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Something went wrong');
-        }
-      })
-      .then((response) => {
-        this.setState({ trips: response }, () => {
-          this.updateStats();
-        });
-      })
+  async componentDidMount() {
+    const tripsRes = await fetch('http://localhost:4000/viajes');
+    const categoriesRes = await fetch('http://localhost:4000/categorias');
+    const tripsJson = await tripsRes.json();
+    const categoriesJson = await categoriesRes.json();
+    this.setState({
+      trips: tripsJson,
+      productCategories: categoriesJson,
+    }, () => {
+      this.updateStats();
+    });
   }
 
   showFromMonth = () => {
@@ -81,37 +83,44 @@ class App extends Component {
   }
 
   updateStats = () => {
-    const { from, to } = this.state;
+    const { from, to, productCategories } = this.state;
     let dateEnd = to ? to : moment();
     let dateStart = from ? from : moment().startOf('year');
-    let trips = 0;
+    let trips = { completed: 0, canceled: 0 };
     let earnings = 0;
     let distance = 0;
     let products = 0;
     let score = 0;
+    let productsData = productCategories.map(el => { return { id: el.id, name: el.descipcion, value: 0 } });
     let groupedData = this.getLineGraphDates();
     let format = this.getLineGraphDateFormat();
     for (const trip of this.state.trips) {
       if (dateStart && dateEnd) {
         if (moment(trip.fecha).isBetween(dateStart, dateEnd)) {
-          trips += 1;
+          if (trip.estatus === 1) {
+            trips.completed += 1;
+            products += trip.detallePaquete.length;
+            productsData = this.addProductElement(productsData, trip);
+          } else {
+            trips.canceled += 1;
+          }
           earnings += trip.precio;
           distance += trip.distancia;
-          products += trip.detallePaquete.length;
           score += trip.puntaje;
           groupedData = this.addLineGraphElement(groupedData, trip, format);
         }
       }
     }
-    console.log('groupedData', groupedData);
+
     this.setState({
       stats: {
         trips,
         earnings,
         distance,
         products,
-        score: score / trips,
+        score: score / trips.completed,
         groupedData,
+        productStats: productsData,
       }
     });
   }
@@ -127,21 +136,18 @@ class App extends Component {
         dateStart.add(1, 'years');
       }
       data.push({ name: dateStart.format('YYYY'), amount: 0, kms: 0, });
-      console.log('data years', data);
     } else if (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
       while (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
         data.push({ name: dateStart.format('MMM'), amount: 0, kms: 0, });
         dateStart.add(1, 'months');
       }
       data.push({ name: dateStart.format('MMM'), amount: 0, kms: 0, });
-      console.log('data month', data);
     } else if (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
       while (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
         data.push({ name: dateStart.format('MMM Do'), amount: 0, kms: 0, });
         dateStart.add(1, 'days');
       }
       data.push({ name: dateStart.format('MMM Do'), amount: 0, kms: 0, });
-      console.log('data days', data);
     }
     return data;
   }
@@ -161,8 +167,7 @@ class App extends Component {
     return format;
   }
 
-  addLineGraphElement(_stats, trip, dateFormat) {
-    console.log('moment(trip.fecha).format(dateFormat)',moment(trip.fecha).format(dateFormat));
+  addLineGraphElement = (_stats, trip, dateFormat) => {
     let stats = [..._stats];
     let index = 0;
     let dataObj = stats.find((el, i) => {
@@ -177,6 +182,15 @@ class App extends Component {
     }
 
     return stats;
+  }
+
+  addProductElement = (productsData, trip) => {
+    let data = [...productsData];
+    for (const product of trip.detallePaquete) {
+      let index = data.findIndex((el) => { return el.id === product.categoria; });
+      data[index].value += 1;
+    }
+    return data;
   }
 
   render() {
@@ -232,7 +246,7 @@ class App extends Component {
             </Col>
           </Row>
           <Resumen
-            trips={stats.trips}
+            trips={stats.trips.completed + stats.trips.canceled}
             earnings={stats.earnings}
             distance={stats.distance}
             products={stats.products}
@@ -241,12 +255,16 @@ class App extends Component {
 
             {/* Viajes */}
             <Col xs="12" md="6" className="viajes">
-              <Viajes data={data02} />
+              <Viajes
+                total={stats.trips.completed + stats.trips.canceled}
+                data={[{ name: 'Cancelados', value: stats.trips.canceled }, { name: 'Completados', value: stats.trips.completed }]} />
             </Col>
 
             {/* Paquetes */}
             <Col xs="12" md="6" className="section paquetes">
-              <Paquetes data={data02} />
+              <Paquetes
+                total={stats.products}
+                data={stats.productStats} />
             </Col>
 
           </Row>
@@ -254,12 +272,16 @@ class App extends Component {
 
             {/* Ganancias */}
             <Col xs="12" md="6" className="ganancias">
-              <Ganancias total={stats.earnings} data={stats.groupedData} />
+              <Ganancias
+                total={stats.earnings}
+                data={stats.groupedData} />
             </Col>
 
             {/* Distancias */}
             <Col xs="12" md="6" className="section distancias">
-              <Distancias total={stats.distance} data={stats.groupedData} />
+              <Distancias
+                total={stats.distance}
+                data={stats.groupedData} />
             </Col>
 
           </Row>

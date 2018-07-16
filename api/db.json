@@ -53,6 +53,29 @@
             ],
             "distancia": 0,
             "puntaje": 0
+        },
+        {
+            "id": 4,
+            "repartidorId": 1,
+            "fecha": "2018-06-01T00:00:00",
+            "estatus": 1,
+            "origen": "Museo Trompo Mágico",
+            "destino": "Hotel NH Collection Guadalajara Providencia",
+            "precio": 72,
+            "detallePaquete": [
+                {
+                    "peso": 1.2,
+                    "descripcion": "laptop",
+                    "categoria": 2
+                },
+                {
+                    "peso": 0.3,
+                    "descripcion": "tarea",
+                    "categoria": 1
+                }
+            ],
+            "distancia": 3.3,
+            "puntaje": 8
         }
     ],
     "estatus": [
