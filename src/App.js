@@ -99,20 +99,18 @@ class App extends Component {
     let groupedData = this.getLineGraphDates();
     let format = this.getLineGraphDateFormat();
     for (const trip of this.state.trips) {
-      if (dateStart && dateEnd) {
-        if (moment(trip.date).isBetween(dateStart, dateEnd)) {
-          if (trip.status === 1) {
-            trips.completed += 1;
-            products += trip.packageDetail.length;
-            productsData = this.addProductElement(productsData, trip);
-            distance += trip.distance;
-            earnings += trip.cost;
-            score += trip.score;
-          } else {
-            trips.canceled += 1;
-          }
-          groupedData = this.addLineGraphElement(groupedData, trip, format);
+      if (moment(trip.date).isBetween(dateStart, dateEnd)) {
+        if (trip.status === 1) {
+          trips.completed += 1;
+          products += trip.packageDetail.length;
+          productsData = this.addProductElement(productsData, trip);
+          distance += trip.distance;
+          earnings += trip.cost;
+          score += trip.score;
+        } else {
+          trips.canceled += 1;
         }
+        groupedData = this.addLineGraphElement(groupedData, trip, format);
       }
     }
     this.setState({
@@ -136,20 +134,20 @@ class App extends Component {
     const { to, from } = this.state;
     let dateEnd = to ? moment(to) : moment();
     let dateStart = from ? moment(from) : moment().startOf('year');
-    if (moment(dateEnd).diff(moment(dateStart), 'years') >= 1) {
-      while (moment(dateEnd).diff(moment(dateStart), 'years') >= 1) {
+    if (dateEnd.diff(dateStart, 'years') >= 1) {
+      while (dateEnd.diff(dateStart, 'years') >= 1) {
         data.push({ name: dateStart.format('YYYY'), amount: 0, kms: 0, });
         dateStart.add(1, 'years');
       }
       data.push({ name: dateStart.format('YYYY'), amount: 0, kms: 0, });
-    } else if (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
-      while (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
+    } else if (dateEnd.diff(dateStart, 'months') >= 1) {
+      while (dateEnd.diff(dateStart, 'months') >= 1) {
         data.push({ name: dateStart.format('MMM'), amount: 0, kms: 0, });
         dateStart.add(1, 'months');
       }
       data.push({ name: dateStart.format('MMM'), amount: 0, kms: 0, });
-    } else if (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
-      while (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
+    } else if (dateEnd.diff(dateStart, 'days') >= 1) {
+      while (dateEnd.diff(dateStart, 'days') >= 1) {
         data.push({ name: dateStart.format('MMM Do'), amount: 0, kms: 0, });
         dateStart.add(1, 'days');
       }
@@ -163,11 +161,11 @@ class App extends Component {
     const { to, from } = this.state;
     let dateEnd = to ? moment(to) : moment();
     let dateStart = from ? moment(from) : moment().startOf('year');
-    if (moment(dateEnd).diff(moment(dateStart), 'years') >= 1) {
+    if (dateEnd.diff(dateStart, 'years') >= 1) {
       return 'YYYY';
-    } else if (moment(dateEnd).diff(moment(dateStart), 'months') >= 1) {
+    } else if (dateEnd.diff(dateStart, 'months') >= 1) {
       return 'MMM';
-    } else if (moment(dateEnd).diff(moment(dateStart), 'days') >= 1) {
+    } else if (dateEnd.diff(dateStart, 'days') >= 1) {
       return 'MMM Do';
     }
     return format;
