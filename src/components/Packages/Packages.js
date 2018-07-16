@@ -9,7 +9,7 @@ const Packages = ({ total, data }) => {
     total >0 ? 
     <div>
       <div><span className="section-title">Artículos</span></div>
-      <div><span className="cifra">{total} artículos entregados</span></div>
+      <div><span className="cifra">{total} Artículos Entregados</span></div>
       <div className="graph-container">
         <PieChart width={160} height={160}>
           <Pie
