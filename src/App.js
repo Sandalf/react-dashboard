@@ -49,16 +49,20 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const tripsRes = await fetch(`${API_ROOT}/trips`);
-    const categoriesRes = await fetch(`${API_ROOT}/categories`);
-    const tripsJson = await tripsRes.json();
-    const categoriesJson = await categoriesRes.json();
-    this.setState({
-      trips: tripsJson,
-      productCategories: categoriesJson,
-    }, () => {
-      this.updateStats();
-    });
+    try {
+      const tripsRes = await fetch(`${API_ROOT}/trips`);
+      const categoriesRes = await fetch(`${API_ROOT}/categories`);
+      const tripsJson = await tripsRes.json();
+      const categoriesJson = await categoriesRes.json();
+      this.setState({
+        trips: tripsJson,
+        productCategories: categoriesJson,
+      }, () => {
+        this.updateStats();
+      });
+    } catch (error) {
+      console.error("Error trying to get trips and categories:", error);
+    }
   }
 
   showFromMonth = () => {
