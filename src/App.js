@@ -119,7 +119,7 @@ class App extends Component {
           earnings,
           distance,
           products,
-          score: score / trips.completed,
+          score: score > 0 ? score / trips.completed : score,
         },
         trips,
         groupedData,

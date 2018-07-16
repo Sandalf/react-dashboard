@@ -26,7 +26,7 @@ const Totals = ({ trips, earnings, distance, products, score }) => {
       <Col>
         <div className="resumen-item">
           <p className="cifra">{products}</p>
-          <span>Articulos</span>
+          <span>Artículos</span>
         </div>
       </Col>
       <Col>
