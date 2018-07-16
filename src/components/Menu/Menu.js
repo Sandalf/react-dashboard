@@ -1,23 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Collapse, Nav, Navbar, NavbarToggler, NavbarBrand, NavItem, NavLink } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Navbar, NavbarBrand } from 'reactstrap';
+import avatar from '../../images/avatar.jpg';
 
 const Menu = ({ handleToggle, collapsed }) => {
   return (
     <header>
       <Navbar color="faded" light>
         <NavbarBrand href="/" className="mr-auto" style={{ color: '#0065ff' }}>Zubut</NavbarBrand>
-        <NavbarToggler onClick={handleToggle} className="mr-2" />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
-            <NavItem>
-              <NavLink href="#">Inicio</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#">Dashboard</NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
+        <Dropdown isOpen={!collapsed} toggle={handleToggle}>
+          <DropdownToggle className="menu-button">
+            Menu
+        </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>Tablero</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <img src={avatar} style={{ height: '40px', margin: '0px 15px', borderRadius: '50%' }} />
       </Navbar>
     </header>
   )
