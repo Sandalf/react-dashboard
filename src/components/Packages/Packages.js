@@ -6,9 +6,10 @@ const COLORS = ['#00C49F', '#0088FE', '#FFBB28'];
 
 const Packages = ({ total, data }) => {
   return (
+    total >0 ? 
     <div>
-      <div><span className="section-title">Articulos</span></div>
-      <div><span className="cifra">{total} articulos entregados</span></div>
+      <div><span className="section-title">Artículos</span></div>
+      <div><span className="cifra">{total} artículos entregados</span></div>
       <div className="graph-container">
         <PieChart width={160} height={160}>
           <Pie
@@ -25,6 +26,11 @@ const Packages = ({ total, data }) => {
           <Tooltip />
         </PieChart>
       </div>
+    </div>
+    :
+    <div>
+      <div><span className="section-title">Artículos</span></div>
+      <div><span className="cifra">No hay datos</span></div>
     </div>
   )
 }

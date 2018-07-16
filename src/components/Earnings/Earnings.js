@@ -9,7 +9,7 @@ const Earnings = ({ total, data }) => {
       <div><span className="cifra">${total} MXN</span></div>
       <div>
         <LineChart width={500} height={300} data={data}
-          margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+          margin={{ top: 5, right: 30, left: -20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
