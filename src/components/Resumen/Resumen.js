@@ -31,7 +31,7 @@ const Resumen = ({ trips, earnings, distance, products, score }) => {
       </Col>
       <Col>
         <div className="resumen-item">
-          <p className="cifra">{score}/10</p>
+          <p className="cifra">{Math.round(score)}/10</p>
           <span>Puntaje</span>
         </div>
       </Col>
