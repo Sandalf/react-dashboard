@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Pie, PieChart, Tooltip } from 'recharts';
 
-const Paquetes = ({ total, data }) => {
+const Packages = ({ total, data }) => {
   return (
     <div>
       <div><span className="section-title">Articulos</span></div>
@@ -17,10 +17,10 @@ const Paquetes = ({ total, data }) => {
   )
 }
 
-Paquetes.propTypes = {
+Packages.propTypes = {
   total: PropTypes.number,
   data: PropTypes.array,
 };
 
 
-export default Paquetes;
+export default Packages;

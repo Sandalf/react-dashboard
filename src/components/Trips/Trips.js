@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Pie, PieChart, Tooltip } from 'recharts';
 
-const Viajes = ({ total, data }) => {
+const Trips = ({ total, data }) => {
   return (
     <div className="section">
       <div><span className="section-title">Viajes</span></div>
@@ -17,10 +17,10 @@ const Viajes = ({ total, data }) => {
   )
 }
 
-Viajes.propTypes = {
+Trips.propTypes = {
   total: PropTypes.number,
   data: PropTypes.array,
 };
 
 
-export default Viajes;
+export default Trips;
