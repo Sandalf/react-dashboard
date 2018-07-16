@@ -8,25 +8,6 @@ body {
   font-family: 'Varela Round', sans-serif;  
 }
 
-/** HEADER **/
-
-header {
-  background: #fff;
-  border: 1px #ebecf0 solid;
-}
-
-.menu-button {
-  background: transparent;
-  color: black;
-  border: none;
-  transition: all .3s ease-in;
-}
-
-.menu-button:hover {
-  background: #ebecf0;
-  color: black;
-}
-
 /** DASHBOARD **/
 
 .no-margin {
@@ -65,38 +46,35 @@ header {
 
 /** VIAJES **/
 
-.viajes {
+.trps {
   padding: 0px;
 }
 
-.viajes .graph-container div:first-child {
+.trps .graph-container div:first-child {
   margin: 0 auto;
 }
 
 @media (min-width: 992px) {
-  .viajes {
+  .trps {
     padding-right: 15px;
   }
 }
 
-/** DISTANCIAS **/
-
-
 /** GANANCIAS **/
 
-.ganancias {
+.earnings {
   padding: 0px;
 }
 
 @media (min-width: 992px) {
-  .ganancias {
+  .earnings {
     padding-right: 15px;
   }
 }
 
 /**  PAQUETES **/
 
-.paquetes .graph-container div:first-child {
+.packages .graph-container div:first-child {
   margin: 0 auto;
 }
 
