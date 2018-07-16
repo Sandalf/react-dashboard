@@ -35,15 +35,18 @@ class App extends Component {
     trips: [],
     productCategories: [],
     stats: {
+      totals: {
+        trips: 0,
+        earnings: 0,
+        distance: 0,
+        products: 0,
+        score: 0,
+      },
       trips: {
         completed: 0,
         canceled: 0,
       },
       productStats: [],
-      earnings: 0,
-      distance: 0,
-      products: 0,
-      score: 0,
       groupedData: distanciasData,
     },
   }
@@ -101,12 +104,12 @@ class App extends Component {
             trips.completed += 1;
             products += trip.detallePaquete.length;
             productsData = this.addProductElement(productsData, trip);
+            distance += trip.distancia;
+            earnings += trip.precio;
+            score += trip.puntaje;
           } else {
             trips.canceled += 1;
           }
-          earnings += trip.precio;
-          distance += trip.distancia;
-          score += trip.puntaje;
           groupedData = this.addLineGraphElement(groupedData, trip, format);
         }
       }
@@ -114,11 +117,14 @@ class App extends Component {
 
     this.setState({
       stats: {
+        totals: {
+          trips: (trips.completed + trips.canceled),
+          earnings,
+          distance,
+          products,
+          score: score / trips.completed,
+        },
         trips,
-        earnings,
-        distance,
-        products,
-        score: score / trips.completed,
         groupedData,
         productStats: productsData,
       }
@@ -246,24 +252,24 @@ class App extends Component {
             </Col>
           </Row>
           <Resumen
-            trips={stats.trips.completed + stats.trips.canceled}
-            earnings={stats.earnings}
-            distance={stats.distance}
-            products={stats.products}
-            score={stats.score} />
+            trips={stats.totals.trips}
+            earnings={stats.totals.earnings}
+            distance={stats.totals.distance}
+            products={stats.totals.products}
+            score={stats.totals.score} />
           <Row className="no-margin">
 
             {/* Viajes */}
             <Col xs="12" md="6" className="viajes">
               <Viajes
-                total={stats.trips.completed + stats.trips.canceled}
+                total={stats.totals.trips}
                 data={[{ name: 'Cancelados', value: stats.trips.canceled }, { name: 'Completados', value: stats.trips.completed }]} />
             </Col>
 
             {/* Paquetes */}
             <Col xs="12" md="6" className="section paquetes">
               <Paquetes
-                total={stats.products}
+                total={stats.totals.products}
                 data={stats.productStats} />
             </Col>
 
@@ -273,14 +279,14 @@ class App extends Component {
             {/* Ganancias */}
             <Col xs="12" md="6" className="ganancias">
               <Ganancias
-                total={stats.earnings}
+                total={stats.totals.earnings}
                 data={stats.groupedData} />
             </Col>
 
             {/* Distancias */}
             <Col xs="12" md="6" className="section distancias">
               <Distancias
-                total={stats.distance}
+                total={stats.totals.distance}
                 data={stats.groupedData} />
             </Col>
 
