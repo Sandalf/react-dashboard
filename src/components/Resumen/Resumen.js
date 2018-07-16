@@ -19,7 +19,7 @@ const Resumen = ({ trips, earnings, distance, products, score }) => {
       </Col>
       <Col>
         <div className="resumen-item">
-          <p className="cifra">{distance}</p>
+          <p className="cifra">{Math.round(distance)}</p>
           <span>Kms</span>
         </div>
       </Col>

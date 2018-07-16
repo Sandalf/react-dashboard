@@ -6,7 +6,7 @@ const Distancias = ({ total, data }) => {
   return (
     <div>
       <div><span className="section-title">Distancias</span></div>
-      <div><span className="cifra">{total} KM</span></div>
+      <div><span className="cifra">{Math.round(total)} KM</span></div>
       <div>
         <LineChart width={500} height={300} data={data}
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
