@@ -15,6 +15,18 @@ header {
   border: 1px #ebecf0 solid;
 }
 
+.menu-button {
+  background: transparent;
+  color: black;
+  border: none;
+  transition: all .3s ease-in;
+}
+
+.menu-button:hover {
+  background: #ebecf0;
+  color: black;
+}
+
 /** DASHBOARD **/
 
 .no-margin {
