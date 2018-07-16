@@ -15,7 +15,6 @@ import 'moment/locale/es';
 import 'react-day-picker/lib/style.css';
 import './App.css';
 
-
 const linearGraphData = [
   { name: 'Ene', amount: 0, kms: 0, },
   { name: 'Feb', amount: 0, kms: 0, },
@@ -45,7 +44,7 @@ class App extends Component {
         completed: 0,
         canceled: 0,
       },
-      productStats: linearGraphData,
+      productData: linearGraphData,
       groupedData: linearGraphData,
     },
   }
@@ -124,7 +123,7 @@ class App extends Component {
         },
         trips,
         groupedData,
-        productStats: productsData,
+        productData: productsData,
       }
     });
   }
@@ -268,7 +267,7 @@ class App extends Component {
             <Col xs="12" md="6" className="section paquetes">
               <Packages
                 total={stats.totals.products}
-                data={stats.productStats} />
+                data={stats.productData} />
             </Col>
 
           </Row>
