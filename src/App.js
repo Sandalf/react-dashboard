@@ -4,27 +4,26 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import IoCalendar from 'react-icons/lib/io/calendar';
 import moment from 'moment';
 import MomentLocaleUtils, { formatDate, parseDate } from 'react-day-picker/moment';
-import Distancias from './components/Distancias';
-import Ganancias from './components/Ganancias';
+import Distances from './components/Distances';
+import Earnings from './components/Earnings';
 import Menu from './components/Menu';
-import Paquetes from './components/Paquetes';
-import Viajes from './components/Viajes';
+import Packages from './components/Packages';
+import Totals from './components/Totals'
+import Trips from './components/Trips';
+import { API_ROOT } from './api/config';
 import 'moment/locale/es';
 import 'react-day-picker/lib/style.css';
 import './App.css';
 
-import Resumen from './components/Resumen'
 
-const data02 = [{ name: 'Completados', value: 603, id: 2 }, { name: 'Cancelados', value: 30, id: 1 }];
-
-const distanciasData = [
-  { name: 'Ene', uv: 0, pv: 0, amount: 0, kms: 0, },
-  { name: 'Feb', uv: 0, pv: 0, amount: 0, kms: 0, },
-  { name: 'Mar', uv: 0, pv: 0, amount: 0, kms: 0, },
-  { name: 'Abr', uv: 0, pv: 0, amount: 0, kms: 0, },
-  { name: 'May', uv: 0, pv: 0, amount: 0, kms: 0, },
-  { name: 'Jun', uv: 0, pv: 0, amount: 0, kms: 0, },
-  { name: 'Jul', uv: 0, pv: 0, amount: 0, kms: 0, },
+const linearGraphData = [
+  { name: 'Ene', amount: 0, kms: 0, },
+  { name: 'Feb', amount: 0, kms: 0, },
+  { name: 'Mar', amount: 0, kms: 0, },
+  { name: 'Abr', amount: 0, kms: 0, },
+  { name: 'May', amount: 0, kms: 0, },
+  { name: 'Jun', amount: 0, kms: 0, },
+  { name: 'Jul', amount: 0, kms: 0, },
 ];
 
 class App extends Component {
@@ -46,14 +45,14 @@ class App extends Component {
         completed: 0,
         canceled: 0,
       },
-      productStats: [],
-      groupedData: distanciasData,
+      productStats: linearGraphData,
+      groupedData: linearGraphData,
     },
   }
 
   async componentDidMount() {
-    const tripsRes = await fetch('http://localhost:4000/viajes');
-    const categoriesRes = await fetch('http://localhost:4000/categorias');
+    const tripsRes = await fetch(`${API_ROOT}/trips`);
+    const categoriesRes = await fetch(`${API_ROOT}/categories`);
     const tripsJson = await tripsRes.json();
     const categoriesJson = await categoriesRes.json();
     this.setState({
@@ -99,14 +98,14 @@ class App extends Component {
     let format = this.getLineGraphDateFormat();
     for (const trip of this.state.trips) {
       if (dateStart && dateEnd) {
-        if (moment(trip.fecha).isBetween(dateStart, dateEnd)) {
-          if (trip.estatus === 1) {
+        if (moment(trip.date).isBetween(dateStart, dateEnd)) {
+          if (trip.status === 1) {
             trips.completed += 1;
-            products += trip.detallePaquete.length;
+            products += trip.packageDetail.length;
             productsData = this.addProductElement(productsData, trip);
-            distance += trip.distancia;
-            earnings += trip.precio;
-            score += trip.puntaje;
+            distance += trip.distance;
+            earnings += trip.cost;
+            score += trip.score;
           } else {
             trips.canceled += 1;
           }
@@ -114,7 +113,6 @@ class App extends Component {
         }
       }
     }
-
     this.setState({
       stats: {
         totals: {
@@ -178,12 +176,12 @@ class App extends Component {
     let index = 0;
     let dataObj = stats.find((el, i) => {
       index = i;
-      return el.name === moment(trip.fecha).format(dateFormat);
+      return el.name === moment(trip.date).format(dateFormat);
     });
 
     if (dataObj) {
-      dataObj.amount += trip.precio;
-      dataObj.kms += trip.distancia;
+      dataObj.amount += trip.cost;
+      dataObj.kms += trip.distance;
       stats[index] = dataObj;
     }
 
@@ -192,8 +190,8 @@ class App extends Component {
 
   addProductElement = (productsData, trip) => {
     let data = [...productsData];
-    for (const product of trip.detallePaquete) {
-      let index = data.findIndex((el) => { return el.id === product.categoria; });
+    for (const product of trip.packageDetail) {
+      let index = data.findIndex((el) => { return el.id === product.categoryId; });
       data[index].value += 1;
     }
     return data;
@@ -251,7 +249,7 @@ class App extends Component {
               </div>
             </Col>
           </Row>
-          <Resumen
+          <Totals
             trips={stats.totals.trips}
             earnings={stats.totals.earnings}
             distance={stats.totals.distance}
@@ -261,14 +259,14 @@ class App extends Component {
 
             {/* Viajes */}
             <Col xs="12" md="6" className="viajes">
-              <Viajes
+              <Trips
                 total={stats.totals.trips}
                 data={[{ name: 'Cancelados', value: stats.trips.canceled }, { name: 'Completados', value: stats.trips.completed }]} />
             </Col>
 
             {/* Paquetes */}
             <Col xs="12" md="6" className="section paquetes">
-              <Paquetes
+              <Packages
                 total={stats.totals.products}
                 data={stats.productStats} />
             </Col>
@@ -278,14 +276,14 @@ class App extends Component {
 
             {/* Ganancias */}
             <Col xs="12" md="6" className="ganancias">
-              <Ganancias
+              <Earnings
                 total={stats.totals.earnings}
                 data={stats.groupedData} />
             </Col>
 
             {/* Distancias */}
             <Col xs="12" md="6" className="section distancias">
-              <Distancias
+              <Distances
                 total={stats.totals.distance}
                 data={stats.groupedData} />
             </Col>

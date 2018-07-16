@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
-const Ganancias = ({ total, data }) => {
+const Distances = ({ total, data }) => {
   return (
-    <div className="section">
-      <div><span className="section-title">Ganancias</span></div>
-      <div><span className="cifra">${total} MXN</span></div>
+    <div>
+      <div><span className="section-title">Distancias</span></div>
+      <div><span className="cifra">{Math.round(total)} KM</span></div>
       <div>
         <LineChart width={500} height={300} data={data}
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
@@ -14,17 +14,17 @@ const Ganancias = ({ total, data }) => {
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Line type="monotone" dataKey="amount" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="kms" stroke="#8884d8" activeDot={{ r: 8 }} />
         </LineChart>
       </div>
     </div>
   )
 }
 
-Ganancias.propTypes = {
+Distances.propTypes = {
   total: PropTypes.number,
   data: PropTypes.array,
 };
 
 
-export default Ganancias;
+export default Distances;

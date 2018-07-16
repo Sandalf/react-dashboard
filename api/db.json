@@ -1,261 +1,261 @@
 {
-    "viajes": [
+    "trips": [
         {
             "id": 1,
-            "repartidorId": 1,
-            "fecha": "2018-07-13T00:00:00",
-            "estatus": 1,
-            "origen": "Auditorio Telmex",
-            "destino": "Basílica de Nuestra Señora de Zapopan",
-            "precio": 81,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-07-13T00:00:00",
+            "status": 1,
+            "pickupPoint": "Auditorio Telmex",
+            "deliveryPoint": "Basílica de Nuestra Señora de Zapopan",
+            "cost": 81,
+            "packageDetail": [
                 {
-                    "peso": 3.2,
-                    "descripcion": "sushi",
-                    "categoria": 1
+                    "weight": 3.2,
+                    "description": "sushi",
+                    "categoryId": 1
                 }
             ],
-            "distancia": 8,
-            "puntaje": 9
+            "distance": 8,
+            "score": 9
         },
         {
             "id": 2,
-            "repartidorId": 1,
-            "fecha": "2018-07-03T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 71,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-07-03T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 71,
+            "packageDetail": [
                 {
-                    "peso": 0.2,
-                    "descripcion": "pasaporte",
-                    "categoria": 2
+                    "weight": 0.2,
+                    "description": "pasaporte",
+                    "categoryId": 2
                 }
             ],
-            "distancia": 7,
-            "puntaje": 9
+            "distance": 7,
+            "score": 9
         },
         {
             "id": 3,
-            "repartidorId": 1,
-            "fecha": "2018-07-08T00:00:00",
-            "estatus": 2,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 71,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-07-08T00:00:00",
+            "status": 2,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 71,
+            "packageDetail": [
                 {
-                    "peso": 0.2,
-                    "descripcion": "tarea",
-                    "categoria": 2
+                    "weight": 0.2,
+                    "description": "tarea",
+                    "categoryId": 2
                 }
             ],
-            "distancia": 0,
-            "puntaje": 0
+            "distance": 0,
+            "score": 0
         },
         {
             "id": 4,
-            "repartidorId": 1,
-            "fecha": "2018-06-05T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 72,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-06-05T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 72,
+            "packageDetail": [
                 {
-                    "peso": 1.2,
-                    "descripcion": "laptop",
-                    "categoria": 3
+                    "weight": 1.2,
+                    "description": "laptop",
+                    "categoryId": 3
                 },
                 {
-                    "peso": 0.3,
-                    "descripcion": "tarea",
-                    "categoria": 2
+                    "weight": 0.3,
+                    "description": "tarea",
+                    "categoryId": 2
                 }
             ],
-            "distancia": 3.3,
-            "puntaje": 8
+            "distance": 3.3,
+            "score": 8
         },
         {
             "id": 5,
-            "repartidorId": 1,
-            "fecha": "2018-06-02T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 52,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-06-02T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 52,
+            "packageDetail": [
                 {
-                    "peso": 1.2,
-                    "descripcion": "comida china",
-                    "categoria": 1
+                    "weight": 1.2,
+                    "description": "comida china",
+                    "categoryId": 1
                 }
             ],
-            "distancia": 3.3,
-            "puntaje": 8
+            "distance": 3.3,
+            "score": 8
         },
         {
             "id": 6,
-            "repartidorId": 1,
-            "fecha": "2018-06-08T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 22,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-06-08T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 22,
+            "packageDetail": [
                 {
-                    "peso": 1.2,
-                    "descripcion": "crepas",
-                    "categoria": 1
+                    "weight": 1.2,
+                    "description": "crepas",
+                    "categoryId": 1
                 }
             ],
-            "distancia": 2.3,
-            "puntaje": 9
+            "distance": 2.3,
+            "score": 9
         },
         {
             "id": 7,
-            "repartidorId": 1,
-            "fecha": "2018-05-11T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 62,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-05-11T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 62,
+            "packageDetail": [
                 {
-                    "peso": 1.2,
-                    "descripcion": "tacos",
-                    "categoria": 1
+                    "weight": 1.2,
+                    "description": "tacos",
+                    "categoryId": 1
                 }
             ],
-            "distancia": 4.3,
-            "puntaje": 9
+            "distance": 4.3,
+            "score": 9
         },
         {
             "id": 8,
-            "repartidorId": 1,
-            "fecha": "2018-04-12T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 72,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-04-12T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 72,
+            "packageDetail": [
                 {
-                    "peso": 1.5,
-                    "descripcion": "pollo",
-                    "categoria": 1
+                    "weight": 1.5,
+                    "description": "pollo",
+                    "categoryId": 1
                 }
             ],
-            "distancia": 4.2,
-            "puntaje": 9
+            "distance": 4.2,
+            "score": 9
         },
         {
             "id": 9,
-            "repartidorId": 1,
-            "fecha": "2018-04-11T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 72,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-04-11T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 72,
+            "packageDetail": [
                 {
-                    "peso": 1.5,
-                    "descripcion": "pollo",
-                    "categoria": 1
+                    "weight": 1.5,
+                    "description": "pollo",
+                    "categoryId": 1
                 },
                 {
-                    "peso": 1,
-                    "descripcion": "bebidas",
-                    "categoria": 1
+                    "weight": 1,
+                    "description": "bebidas",
+                    "categoryId": 1
                 }
             ],
-            "distancia": 5.2,
-            "puntaje": 9
+            "distance": 5.2,
+            "score": 9
         },
         {
             "id": 10,
-            "repartidorId": 1,
-            "fecha": "2018-03-11T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 102,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-03-11T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 102,
+            "packageDetail": [
                 {
-                    "peso": 0.2,
-                    "descripcion": "pasaporte",
-                    "categoria": 2
+                    "weight": 0.2,
+                    "description": "pasaporte",
+                    "categoryId": 2
                 }
             ],
-            "distancia": 10.2,
-            "puntaje": 8
+            "distance": 10.2,
+            "score": 8
         },
         {
             "id": 11,
-            "repartidorId": 1,
-            "fecha": "2018-02-21T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 62,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-02-21T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 62,
+            "packageDetail": [
                 {
-                    "peso": 0.2,
-                    "descripcion": "tarea",
-                    "categoria": 2
+                    "weight": 0.2,
+                    "description": "tarea",
+                    "categoryId": 2
                 }
             ],
-            "distancia": 6.2,
-            "puntaje": 8
+            "distance": 6.2,
+            "score": 8
         },
         {
             "id": 12,
-            "repartidorId": 1,
-            "fecha": "2018-01-11T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 72,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-01-11T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 72,
+            "packageDetail": [
                 {
-                    "peso": 0.3,
-                    "descripcion": "tarea",
-                    "categoria": 2
+                    "weight": 0.3,
+                    "description": "tarea",
+                    "categoryId": 2
                 }
             ],
-            "distancia": 7.2,
-            "puntaje": 9
+            "distance": 7.2,
+            "score": 9
         },
         {
             "id": 13,
-            "repartidorId": 1,
-            "fecha": "2018-01-10T00:00:00",
-            "estatus": 1,
-            "origen": "Museo Trompo Mágico",
-            "destino": "Hotel NH Collection Guadalajara Providencia",
-            "precio": 52,
-            "detallePaquete": [
+            "delivererId": 1,
+            "date": "2018-01-10T00:00:00",
+            "status": 1,
+            "pickupPoint": "Museo Trompo Mágico",
+            "deliveryPoint": "Hotel NH Collection Guadalajara Providencia",
+            "cost": 52,
+            "packageDetail": [
                 {
-                    "peso": 0.2,
-                    "descripcion": "tarea",
-                    "categoria": 2
+                    "weight": 0.2,
+                    "description": "tarea",
+                    "categoryId": 2
                 }
             ],
-            "distancia": 5.2,
-            "puntaje": 9
+            "distance": 5.2,
+            "score": 9
         }
     ],
-    "estatus": [
+    "status": [
         {
             "id": 1,
-            "descripcion": "completo"
+            "description": "completo"
         },
         {
             "id": 2,
-            "descripcion": "cancelado"
+            "description": "cancelado"
         }
     ],
-    "categorias": [
+    "categories": [
         {
             "id": 1,
             "descipcion": "alimentos"
@@ -269,7 +269,7 @@
             "descipcion": "otros"
         }
     ],
-    "repartidores": [
+    "deliverers": [
         {
             "id": 1,
             "nombre": "Lorem Ipsum",
@@ -277,7 +277,7 @@
             "direccion": "Aenean placerat ipsum a vulputate hendrerit"
         }
     ],
-    "usuarios": [
+    "users": [
         {
             "id": 1,
             "nombre": "Jorge Perez",
