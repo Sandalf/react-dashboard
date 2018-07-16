@@ -9,7 +9,7 @@ const Trips = ({ total, data }) => {
     total > 0 ?
       <div className="section">
         <div><span className="section-title">Viajes</span></div>
-        <div><span className="cifra">{total} viajes realizados</span></div>
+        <div><span className="cifra">{total} Viajes Realizados</span></div>
         <div className="graph-container">
           <PieChart width={160} height={160}>
             <Pie
