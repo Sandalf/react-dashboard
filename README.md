@@ -1,6 +1,11 @@
+## Requires
+
+- node
+- npm
+
 ## Instructions
 
-Api runs on port 4000, make sure that port is available.
+Ports 3000 and 400 need to be available.
 
 ```sh
 npm install
