@@ -13,7 +13,6 @@ import Trips from './components/Trips';
 import { API_ROOT } from './api/config';
 import 'moment/locale/es';
 import 'react-day-picker/lib/style.css';
-import './App.css';
 
 const linearGraphData = [
   { name: 'Ene', amount: 0, kms: 0, },
@@ -187,8 +186,8 @@ class App extends Component {
     return stats;
   }
 
-  addProductElement = (productsData, trip) => {
-    let data = [...productsData];
+  addProductElement = (_data, trip) => {
+    let data = [..._data];
     for (const product of trip.packageDetail) {
       let index = data.findIndex((el) => { return el.id === product.categoryId; });
       data[index].value += 1;
@@ -257,14 +256,14 @@ class App extends Component {
           <Row className="no-margin">
 
             {/* Viajes */}
-            <Col xs="12" md="6" className="viajes">
+            <Col xs="12" md="6" className="trps">
               <Trips
                 total={stats.totals.trips}
                 data={[{ name: 'Cancelados', value: stats.trips.canceled }, { name: 'Completados', value: stats.trips.completed }]} />
             </Col>
 
             {/* Paquetes */}
-            <Col xs="12" md="6" className="section paquetes">
+            <Col xs="12" md="6" className="section packages">
               <Packages
                 total={stats.totals.products}
                 data={stats.productData} />
@@ -274,14 +273,14 @@ class App extends Component {
           <Row className="no-margin">
 
             {/* Ganancias */}
-            <Col xs="12" md="6" className="ganancias">
+            <Col xs="12" md="6" className="earnings">
               <Earnings
                 total={stats.totals.earnings}
                 data={stats.groupedData} />
             </Col>
 
             {/* Distancias */}
-            <Col xs="12" md="6" className="section distancias">
+            <Col xs="12" md="6" className="section distances">
               <Distances
                 total={stats.totals.distance}
                 data={stats.groupedData} />

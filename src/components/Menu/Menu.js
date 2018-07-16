@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Navbar, NavbarBrand } from 'reactstrap';
 import avatar from '../../images/avatar.jpg';
+import './index.css';
 
 const Menu = ({ handleToggle, collapsed }) => {
   return (
     <header>
       <Navbar color="faded" light>
-        <NavbarBrand href="/" className="mr-auto" style={{ color: '#0065ff' }}>Zubut</NavbarBrand>
+        <NavbarBrand href="/" className="mr-auto" style={{ color: '#0065ff' }}>App</NavbarBrand>
         <Dropdown isOpen={!collapsed} toggle={handleToggle}>
           <DropdownToggle className="menu-button">
             Menu

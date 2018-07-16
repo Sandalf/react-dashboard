@@ -1,0 +1,16 @@
+header {
+  background: #fff;
+  border: 1px #ebecf0 solid;
+}
+
+header .menu-button {
+  background: transparent;
+  color: black;
+  border: none;
+  transition: all .3s ease-in;
+}
+
+header .menu-button:hover {
+  background: #ebecf0;
+  color: black;
+}
